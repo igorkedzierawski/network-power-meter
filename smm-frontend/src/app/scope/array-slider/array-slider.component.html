@@ -1,0 +1,19 @@
+<div class="flex flex-col items-center p-2 bg-white shadow-lg rounded-lg max-w-sm mx-auto">
+    <div *ngIf="items.length !== 0; else elseTemplate">
+        <h2 class="text-xl font-bold text-gray-800">
+            {{ title }}: <span class="text-blue-600">{{ formatItem(selectedItem) }}</span>
+        </h2>
+        <input
+            type="range"
+            [min]="0"
+            [max]="items.length - 1"
+            [(ngModel)]="selectedIndex"
+            (input)="updateSelectedItem()"
+            class="w-full accent-blue-600 mt-2"
+        />
+    </div>
+
+    <ng-template #elseTemplate>
+        <p>This content is hidden!</p>
+    </ng-template>
+</div>

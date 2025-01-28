@@ -1,0 +1,35 @@
+<div class="p-2 border rounded-lg shadow-md">
+    <h3 class="text-xl font-bold text-center mb-4">Kontroler Miernika</h3>
+    <div class="flex justify-between mb-1">
+        <div class="flex flex-col items-center">
+            <span class="text-gray-700 mb-1 text-lg">Napięcie</span>
+            <input type="checkbox" [disabled]="isStartMode" [checked]="checkboxStates[0]" (change)="onCheckboxChange(0, $event)" class="w-6 h-6" />
+        </div>
+        <div class="border-l h-10 mx-1"></div>
+        <div class="flex flex-col items-center">
+            <span class="text-gray-700 mb-1 text-lg">Prąd 1</span>
+            <input type="checkbox" [disabled]="isStartMode" [checked]="checkboxStates[1]" (change)="onCheckboxChange(1, $event)" class="w-6 h-6" />
+        </div>
+        <div class="border-l h-10 mx-1"></div>
+        <div class="flex flex-col items-center">
+            <span class="text-gray-700 mb-1 text-lg">Prąd 2</span>
+            <input type="checkbox" [disabled]="isStartMode" [checked]="checkboxStates[2]" (change)="onCheckboxChange(2, $event)" class="w-6 h-6" />
+        </div>
+    </div>
+
+    <div class="flex justify-between items-center mt-2">
+        <span class="text-lg font-semibold text-gray-800 mr-4">f<sub>sampling</sub> = {{ netFrequencyStr }}Hz</span>
+        <button
+            (click)="onToggleStartStop()"
+            [disabled]="!isStartMode && allCheckboxesUnchecked"
+            [ngClass]="{
+                'bg-green-500 hover:bg-green-600': !isStartMode,
+                'bg-red-500 hover:bg-red-600': isStartMode,
+                'bg-gray-300': !isStartMode && allCheckboxesUnchecked
+            }"
+            class="px-2 py-1 font-semibold text-white rounded-lg shadow disabled:opacity-50"
+        >
+            {{ isStartMode ? "STOP" : "START" }}
+        </button>
+    </div>
+</div>

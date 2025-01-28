@@ -1,0 +1,14 @@
+<div *ngIf="rangeDescription !== null; else elseTemplate">
+    <array-slider
+        #slider
+        [items]="rangeDescription.values"
+        [title]="rangeDescription.name"
+        [selectedIndex]="rangeDescription.defaultIndex"
+        [formatter]="createFormatter()"
+        (onSelectedItemChange)="updateSelectedItem($event)"
+    ></array-slider>
+</div>
+
+<ng-template #elseTemplate>
+    <p>No range description present</p>
+</ng-template>

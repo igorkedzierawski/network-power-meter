@@ -1,0 +1,25 @@
+<div class="flex items-start space-x-4">
+    <div class="relative w-[1000px] h-[500px] border border-black resize overflow-hidden">
+        <canvas #canvas class="w-full h-full"></canvas>
+    </div>
+
+    <div class="flex flex-col space-y-2 p-2 bg-gray-50 border border-gray-300 rounded-lg shadow-md max-w-xs">
+        <h3 class="text-xl font-bold text-center mb-4">Zakresy pomiarów</h3>
+        <range-slider [rangeDescription]="RangeDescriptions.VOLTAGE" (onSelectedValueChange)="voltageRangeChanged($event)"> </range-slider>
+        <range-slider [rangeDescription]="RangeDescriptions.CURRENT" (onSelectedValueChange)="currentRangeChanged($event)"> </range-slider>
+        <range-slider [rangeDescription]="RangeDescriptions.POWER" (onSelectedValueChange)="powerRangeChanged($event)"> </range-slider>
+        <range-slider [rangeDescription]="RangeDescriptions.WINDOW_SPAN" (onSelectedValueChange)="windowSpanChanged($event)"> </range-slider>
+    </div>
+
+    <div *ngIf="samplerInfo !== undefined; else noMeterInfo">
+        <meter-ctl
+            #meterctl
+            [mode]="mode_ctl"
+            [baseFrequency]="samplerInfo.freq"
+            (startStopChanged)="startChangeState($event)"
+        ></meter-ctl>
+    </div>
+    <ng-template #noMeterInfo>
+        <p>Ładowanie informacji o mierniku...</p>
+    </ng-template>
+</div>
